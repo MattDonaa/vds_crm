@@ -14,6 +14,7 @@ import {
   Radio,
   Zap,
   Workflow,
+  Globe2,
   Settings,
   LogOut,
   User,
@@ -51,6 +52,7 @@ const navItems: NavItem[] = [
   { href: "/broadcasts", label: "Broadcasts", icon: Radio },
   { href: "/automations", label: "Automations", icon: Zap },
   { href: "/flows", label: "Flows", icon: Workflow, beta: true },
+  { href: "/dashboard/website-leads", label: "Website Leads", icon: Globe2 },
 ];
 
 const bottomNavItems = [
