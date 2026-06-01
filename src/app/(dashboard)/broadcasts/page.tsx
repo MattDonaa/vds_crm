@@ -176,7 +176,7 @@ export default function BroadcastsPage() {
 
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Broadcasts</h1>
+          <h1 className="text-2xl font-bold text-white">Campaigns</h1>
           <p className="mt-1 text-sm text-slate-400">
             Send bulk messages to your contacts using approved templates.
           </p>
@@ -186,23 +186,23 @@ export default function BroadcastsPage() {
           className="bg-primary text-primary-foreground hover:bg-primary/90"
         >
           <Plus className="h-4 w-4" />
-          New Broadcast
+          New Campaign
         </Button>
       </div>
 
       {broadcasts.length === 0 ? (
         <div className="flex h-64 flex-col items-center justify-center rounded-xl border border-slate-800 bg-slate-900">
           <Radio className="mb-3 h-10 w-10 text-slate-600" />
-          <p className="text-sm font-medium text-white">No broadcasts yet</p>
+          <p className="text-sm font-medium text-white">No campaigns yet</p>
           <p className="mt-1 text-xs text-slate-400">
-            Create your first broadcast to reach your contacts at scale.
+            Create your first campaign to reach your leads at scale.
           </p>
           <Button
             onClick={() => router.push('/broadcasts/new')}
             className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
           >
             <Plus className="h-4 w-4" />
-            New Broadcast
+            New Campaign
           </Button>
         </div>
       ) : (

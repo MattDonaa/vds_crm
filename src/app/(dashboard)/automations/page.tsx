@@ -16,6 +16,8 @@ import {
   Users,
   PhoneCall,
   Loader2,
+  ClipboardList,
+  CheckCircle2,
 } from "lucide-react"
 
 import { createClient } from "@/lib/supabase/client"
@@ -40,6 +42,7 @@ import {
 import { AUTOMATION_TEMPLATES, type TemplateSlug } from "@/lib/automations/templates"
 import { triggerMeta, formatRelative } from "@/lib/automations/trigger-meta"
 import { cn } from "@/lib/utils"
+import { VDS_AUTOMATION_PLANNING_TEMPLATES } from "@/lib/automations/vds-planning-templates"
 
 const TEMPLATE_ORDER: TemplateSlug[] = [
   "welcome_message",
@@ -157,7 +160,7 @@ export default function AutomationsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Automations</h1>
+          <h1 className="text-2xl font-bold text-white">Follow-up Flows</h1>
           <p className="mt-1 text-sm text-slate-400">
             Build workflows that react to WhatsApp® events automatically.
           </p>
@@ -167,7 +170,7 @@ export default function AutomationsPage() {
           className="bg-primary text-primary-foreground hover:bg-primary/90"
         >
           <Plus className="h-4 w-4" />
-          Create Automation
+          Create Follow-up Flow
         </Button>
       </div>
 
@@ -196,12 +199,69 @@ export default function AutomationsPage() {
         </section>
       )}
 
+      <section className="space-y-3">
+        <div>
+          <div className="flex items-center gap-2">
+            <ClipboardList className="h-4 w-4 text-primary" />
+            <h2 className="text-sm font-semibold text-white">VDS planning templates</h2>
+          </div>
+          <p className="mt-1 text-xs text-slate-400">
+            Examples only. These plans do not create, activate, or send automations.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
+          {VDS_AUTOMATION_PLANNING_TEMPLATES.map((template) => (
+            <article
+              key={template.name}
+              className="rounded-xl border border-slate-800 bg-slate-900 p-4"
+            >
+              <div className="flex flex-wrap items-start justify-between gap-2">
+                <h3 className="text-sm font-semibold text-white">{template.name}</h3>
+                <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                  Planning only
+                </span>
+              </div>
+
+              <PlanningField label="Trigger" value={template.trigger} />
+              <PlanningList label="Conditions" values={template.conditions} />
+              <PlanningList label="Actions" values={template.actions} />
+              <PlanningField label="Suggested WhatsApp copy" value={template.message} />
+              <PlanningField label="Tags to apply" value={template.tags.join(", ")} />
+              <PlanningField label="Pipeline stage movement" value={template.pipelineMovement} />
+            </article>
+          ))}
+        </div>
+
+        <div className="rounded-xl border border-primary/20 bg-primary/5 p-4">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-primary" />
+            <h3 className="text-sm font-semibold text-white">Ready for manual setup</h3>
+          </div>
+          <ul className="mt-3 grid gap-2 text-xs text-slate-400 md:grid-cols-2">
+            {[
+              "Choose one planning template and create a draft flow manually.",
+              "Create or confirm the tags referenced by the template.",
+              "Confirm the correct pipeline and stage IDs before adding movement steps.",
+              "Review and personalise the suggested WhatsApp copy.",
+              "Keep the flow inactive while testing each condition and action.",
+              "Activate only after a team member approves the final draft.",
+            ].map((item) => (
+              <li key={item} className="flex gap-2">
+                <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {automations.length === 0 ? (
         <div className="flex h-48 flex-col items-center justify-center rounded-xl border border-dashed border-slate-800 bg-slate-900/40">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
             <Zap className="h-6 w-6 text-primary" />
           </div>
-          <p className="mt-3 text-sm font-medium text-white">No automations yet</p>
+          <p className="mt-3 text-sm font-medium text-white">No follow-up flows yet</p>
           <p className="mt-1 text-xs text-slate-400">
             Pick a template above or create one from scratch.
           </p>
@@ -251,6 +311,32 @@ export default function AutomationsPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+    </div>
+  )
+}
+
+function PlanningField({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="mt-3">
+      <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+        {label}
+      </p>
+      <p className="mt-1 text-xs leading-relaxed text-slate-300">{value}</p>
+    </div>
+  )
+}
+
+function PlanningList({ label, values }: { label: string; values: string[] }) {
+  return (
+    <div className="mt-3">
+      <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+        {label}
+      </p>
+      <ul className="mt-1 space-y-1 text-xs leading-relaxed text-slate-300">
+        {values.map((value) => (
+          <li key={value}>- {value}</li>
+        ))}
+      </ul>
     </div>
   )
 }

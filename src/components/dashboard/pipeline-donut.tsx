@@ -4,6 +4,7 @@ import { GitBranch } from 'lucide-react'
 import type { PipelineDonutData } from '@/lib/dashboard/types'
 import { EmptyState } from './empty-state'
 import { Skeleton } from './skeleton'
+import { useCurrency } from '@/hooks/use-currency'
 
 interface PipelineDonutProps {
   data: PipelineDonutData | null
@@ -11,12 +12,13 @@ interface PipelineDonutProps {
 }
 
 export function PipelineDonut({ data, loading }: PipelineDonutProps) {
+  const { formatCompactCurrency } = useCurrency()
   return (
     <section className="flex h-full flex-col rounded-xl border border-slate-800 bg-slate-900">
       <header className="border-b border-slate-800 px-5 py-4">
         <h2 className="text-sm font-semibold text-white">Pipeline Value</h2>
         <p className="mt-0.5 text-xs text-slate-500">
-          Open deals by stage
+          Open opportunities by stage
         </p>
       </header>
 
@@ -26,8 +28,8 @@ export function PipelineDonut({ data, loading }: PipelineDonutProps) {
         ) : data.stages.length === 0 ? (
           <EmptyState
             icon={GitBranch}
-            title="No open deals yet"
-            hint="Create deals in Pipelines to see stage breakdowns here."
+            title="No project opportunities yet"
+            hint="Create opportunities in Project Pipeline to see stage breakdowns here."
           />
         ) : (
           <>
@@ -42,10 +44,10 @@ export function PipelineDonut({ data, loading }: PipelineDonutProps) {
                   />
                   <span className="flex-1 truncate text-slate-300">{s.name}</span>
                   <span className="text-slate-500 tabular-nums">
-                    {s.dealCount} deal{s.dealCount === 1 ? '' : 's'}
+                    {s.dealCount} opportunit{s.dealCount === 1 ? 'y' : 'ies'}
                   </span>
                   <span className="w-20 text-right text-slate-300 tabular-nums">
-                    {formatCurrencyShort(s.totalValue)}
+                    {formatCompactCurrency(s.totalValue)}
                   </span>
                 </li>
               ))}
@@ -64,6 +66,7 @@ export function PipelineDonut({ data, loading }: PipelineDonutProps) {
 // them for a cleaner look.
 // ------------------------------------------------------------
 function Donut({ data }: { data: PipelineDonutData }) {
+  const { formatCompactCurrency } = useCurrency()
   const size = 200
   const r = 80
   const ringWidth = 18
@@ -121,7 +124,7 @@ function Donut({ data }: { data: PipelineDonutData }) {
           textAnchor="middle"
           className="fill-white text-[18px] font-semibold tabular-nums"
         >
-          {formatCurrencyShort(data.totalValue)}
+          {formatCompactCurrency(data.totalValue)}
         </text>
       </svg>
     </div>
@@ -135,10 +138,4 @@ function arcPath(cx: number, cy: number, r: number, startRad: number, endRad: nu
   const y2 = cy + r * Math.sin(endRad)
   const largeArc = endRad - startRad > Math.PI ? 1 : 0
   return `M ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2}`
-}
-
-function formatCurrencyShort(v: number): string {
-  if (v >= 1_000_000) return `$${(v / 1_000_000).toFixed(1)}M`
-  if (v >= 1_000) return `$${(v / 1_000).toFixed(1)}k`
-  return `$${v.toFixed(0)}`
 }

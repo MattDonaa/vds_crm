@@ -13,10 +13,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "wacrm",
-    template: "%s — wacrm",
+    default: "VDS Studio Console | Veneer Digital Studio",
+    template: "%s | VDS Studio Console",
   },
-  description: "Self-hostable CRM template for WhatsApp.",
+  description:
+    "Private lead management and WhatsApp enquiry dashboard for Veneer Digital Studio.",
   robots: {
     index: false,
     follow: false,
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#020617",
+  themeColor: "#050505",
   colorScheme: "dark",
 };
 
@@ -86,8 +87,8 @@ export default function RootLayout({
             position="top-right"
             toastOptions={{
               style: {
-                background: "rgb(30 41 59)",
-                border: "1px solid rgb(51 65 85)",
+                background: "#0f0f0f",
+                border: "1px solid rgb(255 255 255 / 0.1)",
                 color: "white",
               },
             }}

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
+import { VdsLogo } from "@/components/brand/vds-logo";
+import { CurrencySelector } from "@/components/layout/currency-selector";
 import { LogOut, Menu, Settings as SettingsIcon, User } from "lucide-react";
 import {
   Avatar,
@@ -18,12 +20,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const pageTitles: Record<string, string> = {
-  "/dashboard": "Dashboard",
-  "/inbox": "Inbox",
-  "/contacts": "Contacts",
-  "/pipelines": "Pipelines",
-  "/broadcasts": "Broadcasts",
-  "/automations": "Automations",
+  "/dashboard/website-leads": "Website Enquiries",
+  "/dashboard": "Studio Overview",
+  "/inbox": "Enquiry Inbox",
+  "/contacts": "Leads",
+  "/pipelines": "Project Pipeline",
+  "/broadcasts": "Campaigns",
+  "/automations": "Follow-up Flows",
+  "/reviews": "Review Hub",
   "/settings": "Settings",
 };
 
@@ -32,7 +36,7 @@ function getPageTitle(pathname: string): string {
   const match = Object.entries(pageTitles).find(([path]) =>
     pathname.startsWith(path),
   );
-  return match ? match[1] : "Dashboard";
+  return match ? match[1] : "Studio Overview";
 }
 
 interface HeaderProps {
@@ -66,9 +70,14 @@ export function Header({ onOpenSidebar }: HeaderProps) {
         <h1 className="truncate text-base font-semibold text-white sm:text-lg">
           {title}
         </h1>
+        <div className="hidden border-l border-slate-800 pl-3 xl:block">
+          <VdsLogo showLabel markClassName="hidden" />
+        </div>
       </div>
 
-      <DropdownMenu>
+      <div className="ml-auto flex items-center gap-2">
+        <CurrencySelector />
+        <DropdownMenu>
         <DropdownMenuTrigger
           className="flex items-center gap-2 rounded-md px-1 py-1 transition-colors hover:bg-slate-800/70 focus:bg-slate-800/70 focus:outline-none data-popup-open:bg-slate-800/70 sm:gap-3 sm:pl-1 sm:pr-3"
           aria-label="Open account menu"
@@ -133,7 +142,8 @@ export function Header({ onOpenSidebar }: HeaderProps) {
             Sign out
           </DropdownMenuItem>
         </DropdownMenuContent>
-      </DropdownMenu>
+        </DropdownMenu>
+      </div>
     </header>
   );
 }

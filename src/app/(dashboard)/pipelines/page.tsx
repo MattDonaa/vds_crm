@@ -27,13 +27,15 @@ import { Label } from "@/components/ui/label";
 import { GitBranch, Plus, ChevronDown, Settings } from "lucide-react";
 import { toast } from "sonner";
 
-// Spec-defined seed — name and color per the product spec.
+// Suggested VDS workflow for newly created pipelines. Existing saved
+// pipelines remain untouched and can still be customised in settings.
 const SPEC_DEFAULT_STAGES = [
-  { name: "New Lead", color: "#3b82f6", position: 0 }, // blue
-  { name: "Qualified", color: "#eab308", position: 1 }, // yellow
-  { name: "Proposal Sent", color: "#f97316", position: 2 }, // orange
-  { name: "Negotiation", color: "#8b5cf6", position: 3 }, // purple
-  { name: "Won", color: "#22c55e", position: 4 }, // green
+  { name: "New Enquiry", color: "#3b82f6", position: 0 }, // blue
+  { name: "Discovery Needed", color: "#06b6d4", position: 1 }, // cyan
+  { name: "Quote Requested", color: "#eab308", position: 2 }, // yellow
+  { name: "Quote Sent", color: "#f97316", position: 3 }, // orange
+  { name: "Follow-Up Needed", color: "#8b5cf6", position: 4 }, // purple
+  { name: "Deposit / Approval Pending", color: "#ec4899", position: 5 }, // pink
 ];
 
 export default function PipelinesPage() {
@@ -162,7 +164,6 @@ export default function PipelinesPage() {
     if (!selectedPipelineId) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setStages([]);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDeals([]);
       return;
     }
@@ -360,7 +361,7 @@ export default function PipelinesPage() {
             className="bg-primary text-primary-foreground hover:bg-primary/90"
           >
             <Plus className="mr-1 h-4 w-4" />
-            Add Deal
+            Add Opportunity
           </Button>
         </div>
       </div>
@@ -373,7 +374,7 @@ export default function PipelinesPage() {
             No pipelines yet
           </h3>
           <p className="mt-2 text-sm text-slate-400">
-            Create a pipeline to start tracking deals
+            Create a pipeline to start tracking opportunities
           </p>
           <Button
             onClick={() => setNewPipelineOpen(true)}
@@ -385,6 +386,13 @@ export default function PipelinesPage() {
         </div>
       ) : (
         <>
+          <div className="rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-xs text-slate-400">
+            Use this board for kitchen renovation leads, cabinetry projects,
+            joinery enquiries, website project enquiries, and WhatsApp
+            follow-ups. Stage names can be customised in Manage Pipelines. Use
+            each opportunity&apos;s Won or Lost action when the outcome is
+            confirmed.
+          </div>
           <PipelineAnalytics stages={stages} deals={deals} />
           <PipelineBoard
             stages={stages}
@@ -407,14 +415,16 @@ export default function PipelinesPage() {
             <Input
               value={newPipelineName}
               onChange={(e) => setNewPipelineName(e.target.value)}
-              placeholder="e.g., Enterprise Sales"
+              placeholder="e.g., Kitchen Renovation Enquiries"
               className="mt-2 bg-slate-800 border-slate-700 text-white"
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleCreatePipeline();
               }}
             />
             <p className="mt-2 text-xs text-slate-400">
-              Default stages (New Lead → Won) will be created automatically.
+              Suggested VDS stages (New Enquiry → Deposit / Approval Pending)
+              will be created automatically. Use the opportunity actions for
+              Won or Lost outcomes.
             </p>
           </div>
           <DialogFooter className="bg-slate-900/50 border-slate-700">

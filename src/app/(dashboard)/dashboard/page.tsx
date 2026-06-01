@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import {
   MessageSquare,
   UserPlus,
-  DollarSign,
+  Banknote,
   Send,
 } from 'lucide-react'
 
@@ -31,10 +31,12 @@ import { ConversationsChart } from '@/components/dashboard/conversations-chart'
 import { PipelineDonut } from '@/components/dashboard/pipeline-donut'
 import { ResponseTimeChart } from '@/components/dashboard/response-time-chart'
 import { ActivityFeed } from '@/components/dashboard/activity-feed'
+import { useCurrency } from '@/hooks/use-currency'
 
 type RangeDays = 7 | 30 | 90
 
 export default function DashboardPage() {
+  const { formatCurrency } = useCurrency()
   const [metrics, setMetrics] = useState<MetricsBundle | null>(null)
   const [metricsLoading, setMetricsLoading] = useState(true)
 
@@ -119,9 +121,9 @@ export default function DashboardPage() {
     <div className="space-y-5">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-white">Studio Overview</h1>
         <p className="mt-1 text-sm text-slate-400">
-          Live analytics across conversations, contacts, deals, broadcasts, and automations.
+          Track new enquiries, active conversations, and project opportunities for Veneer Digital Studio.
         </p>
       </div>
 
@@ -132,7 +134,7 @@ export default function DashboardPage() {
         ) : (
           <>
             <MetricCard
-              title="Active Conversations"
+              title="Active Enquiries"
               value={metrics.activeConversations.current.toLocaleString()}
               icon={MessageSquare}
               delta={{
@@ -141,7 +143,7 @@ export default function DashboardPage() {
               }}
             />
             <MetricCard
-              title="New Contacts Today"
+              title="New Leads Today"
               value={metrics.newContactsToday.current.toLocaleString()}
               icon={UserPlus}
               delta={{
@@ -154,10 +156,10 @@ export default function DashboardPage() {
               }}
             />
             <MetricCard
-              title="Open Deals Value"
+              title="Open Opportunities Value"
               value={formatCurrency(metrics.openDealsValue)}
-              icon={DollarSign}
-              subtitle={`${metrics.openDealsCount} open deal${metrics.openDealsCount === 1 ? '' : 's'}`}
+              icon={Banknote}
+              subtitle={`${metrics.openDealsCount} open opportunit${metrics.openDealsCount === 1 ? 'y' : 'ies'}`}
             />
             <MetricCard
               title="Messages Sent Today"
@@ -207,17 +209,6 @@ export default function DashboardPage() {
       <ActivityFeed items={activity} loading={activityLoading} />
     </div>
   )
-}
-
-// ------------------------------------------------------------
-
-function formatCurrency(v: number): string {
-  return new Intl.NumberFormat(undefined, {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(v)
 }
 
 function deltaLabel(delta: number, suffix: string): string {

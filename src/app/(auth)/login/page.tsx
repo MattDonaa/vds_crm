@@ -14,7 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { MessageSquare } from "lucide-react";
+import { VdsLogo } from "@/components/brand/vds-logo";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -47,12 +47,11 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-slate-950 px-4">
       <Card className="w-full max-w-md border-slate-800 bg-slate-900">
         <CardHeader className="items-center text-center">
-          <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-            <MessageSquare className="h-6 w-6 text-primary" />
-          </div>
-          <CardTitle className="text-xl text-white">Welcome back</CardTitle>
+          <VdsLogo className="mb-2 flex-col gap-2" markClassName="h-12 w-12" />
+          <CardTitle className="text-xl text-white">VDS Studio Console</CardTitle>
           <CardDescription className="text-slate-400">
-            Sign in to your account
+            Manage website enquiries, WhatsApp conversations, and project
+            opportunities from one focused workspace.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -106,7 +105,7 @@ export default function LoginPage() {
               disabled={loading}
               className="mt-2 h-10 w-full bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
             >
-              {loading ? "Signing in..." : "Sign in"}
+              {loading ? "Entering..." : "Enter Console"}
             </Button>
           </form>
 

@@ -185,7 +185,7 @@ export function ImportModal({ open, onOpenChange, onImported }: ImportModalProps
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="bg-slate-900 border-slate-700 text-slate-200 sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle className="text-white">Import Contacts</DialogTitle>
+          <DialogTitle className="text-white">Import Leads</DialogTitle>
           <DialogDescription className="text-slate-400">
             Upload a CSV file with a &quot;phone&quot; column (required). Optional columns:
             name, email, company.
@@ -302,7 +302,7 @@ export function ImportModal({ open, onOpenChange, onImported }: ImportModalProps
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               {importing && <Loader2 className="size-4 animate-spin" />}
-              Import {parsedRows.length > 0 ? `${parsedRows.length} Contacts` : ''}
+              Import {parsedRows.length > 0 ? `${parsedRows.length} Leads` : ''}
             </Button>
           )}
         </DialogFooter>

@@ -15,7 +15,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
 import { Loader2 } from 'lucide-react';
 
 interface ContactFormProps {
@@ -157,7 +156,7 @@ export function ContactForm({
       <DialogContent className="bg-slate-900 border-slate-700 text-slate-200 sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-white">
-            {isEdit ? 'Edit Contact' : 'Add Contact'}
+            {isEdit ? 'Edit Lead' : 'Add Lead'}
           </DialogTitle>
           <DialogDescription className="text-slate-400">
             {isEdit

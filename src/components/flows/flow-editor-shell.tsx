@@ -108,7 +108,7 @@ export function FlowEditorShell({ initialFlow, initialNodes }: Props) {
         {/* Sticky-bottom validation panel mirrors the placement used
             when this lived inside FlowBuilder — the activate-readiness
             status follows the user as they scroll, in either view. */}
-        <div className="sticky bottom-4 z-10 shadow-xl shadow-slate-950/60">
+        <div className="sticky bottom-4 z-10 shadow-md shadow-slate-950/40">
           <ValidationPanel />
         </div>
       </div>

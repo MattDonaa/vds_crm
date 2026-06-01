@@ -210,9 +210,9 @@ export default function ContactsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">Contacts</h1>
+          <h1 className="text-2xl font-bold text-white">Leads</h1>
           <p className="text-sm text-slate-400 mt-1">
-            Manage your contact list. {totalCount > 0 && `${totalCount} total contacts.`}
+            Manage captured leads. {totalCount > 0 && `${totalCount} total leads.`}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -229,7 +229,7 @@ export default function ContactsPage() {
             className="bg-primary hover:bg-primary/90 text-primary-foreground"
           >
             <Plus className="size-4" />
-            Add Contact
+            Add Lead
           </Button>
         </div>
       </div>
@@ -270,7 +270,7 @@ export default function ContactsPage() {
                 <TableCell colSpan={7} className="text-center py-12">
                   <div className="flex flex-col items-center gap-2">
                     <Loader2 className="size-6 animate-spin text-primary" />
-                    <p className="text-sm text-slate-500">Loading contacts...</p>
+                    <p className="text-sm text-slate-500">Loading leads...</p>
                   </div>
                 </TableCell>
               </TableRow>
@@ -280,7 +280,7 @@ export default function ContactsPage() {
                   <div className="flex flex-col items-center gap-2">
                     <Users className="size-8 text-slate-600" />
                     <p className="text-sm text-slate-500">
-                      {search ? 'No contacts match your search.' : 'No contacts yet.'}
+                      {search ? 'No leads match your search.' : 'No leads captured yet.'}
                     </p>
                     {!search && (
                       <Button
@@ -290,7 +290,7 @@ export default function ContactsPage() {
                         className="mt-2 border-slate-700 text-slate-300 hover:bg-slate-800"
                       >
                         <Plus className="size-3.5" />
-                        Add your first contact
+                        Add your first lead
                       </Button>
                     )}
                   </div>

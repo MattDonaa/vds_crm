@@ -83,7 +83,7 @@ export function Step4ScheduleSend({
 
   const audienceLabel =
     audience.type === 'all'
-      ? 'All Contacts'
+      ? 'All Leads'
       : audience.type === 'tags'
         ? `Tags (${audience.tagIds?.length ?? 0} selected)`
         : audience.type === 'csv'
@@ -101,7 +101,7 @@ export function Step4ScheduleSend({
 
       {/* Broadcast Name */}
       <div>
-        <label className="mb-1.5 block text-sm font-medium text-white">Broadcast Name</label>
+        <label className="mb-1.5 block text-sm font-medium text-white">Campaign Name</label>
         <Input
           value={name}
           onChange={(e) => onNameChange(e.target.value)}
@@ -154,7 +154,7 @@ export function Step4ScheduleSend({
           </div>
           <div className="h-1.5 w-full rounded-full bg-slate-800">
             <div
-              className="h-1.5 rounded-full bg-primary transition-all duration-300"
+              className="h-1.5 rounded-full bg-primary transition-[width] duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -195,11 +195,11 @@ export function Step4ScheduleSend({
             }
           >
             <Send className="h-4 w-4" />
-            Send Broadcast
+            Send Campaign
           </DialogTrigger>
           <DialogContent className="border-slate-700 bg-slate-900 sm:max-w-md">
             <DialogHeader>
-              <DialogTitle className="text-white">Confirm Broadcast</DialogTitle>
+              <DialogTitle className="text-white">Confirm Campaign</DialogTitle>
               <DialogDescription className="text-slate-400">
                 You are about to send this broadcast to{' '}
                 <span className="font-medium text-white">{estimatedReach.toLocaleString()}</span>{' '}

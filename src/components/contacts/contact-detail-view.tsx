@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
-import type { Contact, Tag, ContactTag, ContactNote, CustomField, ContactCustomValue, Deal } from '@/types';
+import type { Contact, Tag, ContactNote, CustomField, Deal } from '@/types';
 import {
   Sheet,
   SheetContent,
@@ -17,8 +17,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Phone,
   Mail,
@@ -29,9 +27,9 @@ import {
   Plus,
   Trash2,
   Save,
-  X,
-  DollarSign,
+  Banknote,
 } from 'lucide-react';
+import { useCurrency } from '@/hooks/use-currency';
 
 interface ContactDetailViewProps {
   open: boolean;
@@ -46,6 +44,7 @@ export function ContactDetailView({
   contactId,
   onUpdated,
 }: ContactDetailViewProps) {
+  const { formatCurrency } = useCurrency();
   const supabase = createClient();
 
   const [contact, setContact] = useState<Contact | null>(null);
@@ -411,7 +410,7 @@ export function ContactDetailView({
                   value="deals"
                   className="data-active:bg-slate-800 data-active:text-primary text-slate-400"
                 >
-                  Deals
+                  Opportunities
                 </TabsTrigger>
               </TabsList>
 
@@ -487,7 +486,7 @@ export function ContactDetailView({
                             key={tag.id}
                             onClick={() => toggleTag(tag.id)}
                             disabled={savingTags}
-                            className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+                            className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-[opacity,box-shadow] cursor-pointer ${
                               selected
                                 ? 'ring-2 ring-primary ring-offset-1 ring-offset-slate-900'
                                 : 'opacity-50 hover:opacity-80'
@@ -552,7 +551,7 @@ export function ContactDetailView({
                           </p>
                           <button
                             onClick={() => deleteNote(note.id)}
-                            className="opacity-0 group-hover:opacity-100 text-slate-500 hover:text-red-400 transition-all cursor-pointer shrink-0"
+                            className="opacity-0 group-hover:opacity-100 text-slate-500 hover:text-red-400 transition-[opacity,color] cursor-pointer shrink-0"
                           >
                             <Trash2 className="size-3.5" />
                           </button>
@@ -626,7 +625,7 @@ export function ContactDetailView({
                     <Loader2 className="size-5 animate-spin text-primary" />
                   </div>
                 ) : deals.length === 0 ? (
-                  <p className="text-xs text-slate-500">No deals yet</p>
+                  <p className="text-xs text-slate-500">No project opportunities yet.</p>
                 ) : (
                   <div className="space-y-2">
                     {deals.map((deal) => (
@@ -652,12 +651,8 @@ export function ContactDetailView({
                         </div>
                         <div className="mt-1.5 flex items-center justify-between text-xs text-slate-400">
                           <span className="flex items-center gap-1">
-                            <DollarSign className="size-3" />
-                            {new Intl.NumberFormat('en-US', {
-                              style: 'currency',
-                              currency: deal.currency || 'USD',
-                              maximumFractionDigits: 0,
-                            }).format(Number(deal.value || 0))}
+                            <Banknote className="size-3" />
+                            {formatCurrency(deal.value)}
                           </span>
                           {deal.status && deal.status !== 'open' && (
                             <span

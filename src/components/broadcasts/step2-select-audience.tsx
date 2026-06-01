@@ -47,7 +47,7 @@ const audienceOptions: {
 }[] = [
   {
     type: 'all',
-    label: 'All Contacts',
+    label: 'All Leads',
     description: 'Send to every contact in your database',
     icon: Users,
   },
@@ -277,7 +277,7 @@ export function Step2SelectAudience({
                     option.type === 'csv' ? audience.csvContacts : undefined,
                 })
               }
-              className={`flex items-start gap-3 rounded-xl border p-4 text-left transition-all ${
+              className={`flex items-start gap-3 rounded-xl border p-4 text-left transition-colors ${
                 isSelected
                   ? 'border-primary bg-primary/5 ring-1 ring-primary/30'
                   : 'border-slate-800 bg-slate-900/50 hover:border-slate-700'
@@ -320,7 +320,7 @@ export function Step2SelectAudience({
                   <button
                     key={tag.id}
                     onClick={() => toggleTag(tag.id)}
-                    className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                    className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
                       isSelected
                         ? 'border-primary/30 bg-primary/10 text-primary'
                         : 'border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-600'
@@ -408,7 +408,7 @@ export function Step2SelectAudience({
                 <button
                   key={tag.id}
                   onClick={() => toggleExcludeTag(tag.id)}
-                  className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                  className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
                     isExcluded
                       ? 'border-red-500/30 bg-red-500/10 text-red-300'
                       : 'border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-600'

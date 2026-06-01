@@ -2,21 +2,13 @@
 
 import type { Deal, PipelineStage } from "@/types";
 import { Calendar, Check, X } from "lucide-react";
+import { useCurrency } from "@/hooks/use-currency";
 
 interface DealCardProps {
   deal: Deal;
   stage: PipelineStage | null;
   onEdit: (deal: Deal) => void;
   isOverlay?: boolean;
-}
-
-function formatCurrency(value: number, currency?: string) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: currency || "USD",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(Number(value || 0));
 }
 
 function formatDate(dateStr: string) {
@@ -34,6 +26,7 @@ function initials(name?: string, fallback?: string) {
 }
 
 export function DealCard({ deal, stage, onEdit, isOverlay }: DealCardProps) {
+  const { formatCurrency } = useCurrency();
   const contactLabel = deal.contact?.name || deal.contact?.phone || "No contact";
   const assigneeLabel = deal.assignee?.full_name || null;
 
@@ -47,10 +40,10 @@ export function DealCard({ deal, stage, onEdit, isOverlay }: DealCardProps) {
         e.stopPropagation();
         onEdit(deal);
       }}
-      className={`group relative w-full cursor-pointer rounded-xl border border-slate-700/50 bg-slate-800/70 pl-4 pr-3 py-3 text-left shadow-sm transition-all ${
+      className={`group relative w-full cursor-pointer rounded-xl border border-slate-700/50 bg-slate-800/70 pl-4 pr-3 py-3 text-left shadow-sm transition-[transform,background-color,border-color,box-shadow] ${
         isOverlay
-          ? "shadow-xl"
-          : "hover:-translate-y-0.5 hover:border-slate-600 hover:bg-slate-800 hover:shadow-lg"
+          ? "shadow-md"
+          : "hover:-translate-y-0.5 hover:border-slate-600 hover:bg-slate-800 hover:shadow-sm"
       }`}
     >
       {/* 4px left accent bar using stage color */}
@@ -88,7 +81,7 @@ export function DealCard({ deal, stage, onEdit, isOverlay }: DealCardProps) {
 
       <div className="mt-2 flex items-center justify-between">
         <span className="text-sm font-bold text-primary">
-          {formatCurrency(deal.value, deal.currency)}
+          {formatCurrency(deal.value)}
         </span>
         {deal.expected_close_date && (
           <span className="flex items-center gap-1 text-[11px] text-slate-500">

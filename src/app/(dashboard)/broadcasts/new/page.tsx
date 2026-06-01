@@ -122,7 +122,7 @@ export default function NewBroadcastPage() {
     <div className="mx-auto max-w-3xl space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white">New Broadcast</h1>
+        <h1 className="text-2xl font-bold text-white">New Campaign</h1>
         <p className="mt-1 text-sm text-slate-400">
           Create and send a broadcast message to your contacts.
         </p>
@@ -138,7 +138,7 @@ export default function NewBroadcastPage() {
             <div key={step.key} className="flex flex-1 items-center">
               <div className="flex items-center gap-2">
                 <div
-                  className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium transition-all ${
+                  className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium transition-colors ${
                     isCompleted
                       ? 'bg-primary text-primary-foreground'
                       : isActive
@@ -171,7 +171,7 @@ export default function NewBroadcastPage() {
       {/* Step Content */}
       <div className="relative min-h-[400px]">
         <div
-          className="transition-all duration-300 ease-in-out"
+          className="transition-opacity duration-300 ease-in-out"
           style={{
             opacity: isProcessing ? 0.6 : 1,
             pointerEvents: isProcessing ? 'none' : 'auto',

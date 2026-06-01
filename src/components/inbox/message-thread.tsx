@@ -31,7 +31,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { MessageBubble } from "./message-bubble";
 import { MessageActions } from "./message-actions";
 import { MessageComposer } from "./message-composer";
@@ -872,7 +871,7 @@ export function MessageThread({
           </div>
         ) : messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12">
-            <p className="text-sm text-slate-500">No messages yet</p>
+            <p className="text-sm text-slate-500">No active enquiries yet.</p>
             <p className="text-xs text-slate-600">
               Send a template to start the conversation
             </p>

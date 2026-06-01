@@ -18,6 +18,7 @@ import type { Deal, PipelineStage } from "@/types";
 import { DealCard } from "./deal-card";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { useCurrency } from "@/hooks/use-currency";
 
 interface PipelineBoardProps {
   stages: PipelineStage[];
@@ -25,15 +26,6 @@ interface PipelineBoardProps {
   onDealMoved: (dealId: string, newStageId: string) => void;
   onAddDeal: (stageId: string) => void;
   onEditDeal: (deal: Deal) => void;
-}
-
-function formatCurrency(value: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(value);
 }
 
 export function PipelineBoard({
@@ -177,6 +169,7 @@ function StageColumn({
   onAddDeal: (stageId: string) => void;
   onEditDeal: (deal: Deal) => void;
 }) {
+  const { formatCurrency } = useCurrency();
   const { setNodeRef, isOver } = useDroppable({ id: stage.id });
 
   return (
@@ -204,7 +197,7 @@ function StageColumn({
 
       <div
         ref={setNodeRef}
-        className={`mt-3 flex flex-1 flex-col gap-2 rounded-lg transition-all ${
+        className={`mt-3 flex flex-1 flex-col gap-2 rounded-lg transition-colors ${
           isOver
             ? "bg-primary/5 outline outline-2 outline-dashed outline-primary outline-offset-2"
             : ""
@@ -212,7 +205,7 @@ function StageColumn({
       >
         {deals.length === 0 ? (
           <div className="flex flex-1 items-center justify-center rounded-lg border-2 border-dashed border-slate-700 py-10 text-xs text-slate-500">
-            Drop a deal here
+            Drop an opportunity here
           </div>
         ) : (
           deals.map((deal) => (
@@ -233,7 +226,7 @@ function StageColumn({
         className="mt-3 w-full justify-start border border-dashed border-slate-700 bg-transparent text-slate-400 hover:border-slate-600 hover:bg-slate-800 hover:text-white"
       >
         <Plus className="mr-1 h-3 w-3" />
-        Add Deal
+        Add Opportunity
       </Button>
     </div>
   );

@@ -26,7 +26,7 @@ import {
   X,
   Trash2,
   MessageSquare,
-  DollarSign,
+  Banknote,
   Loader2,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -196,7 +196,7 @@ export function DealForm({
     }
 
     setSaving(false);
-    toast.success(deal ? "Deal updated" : "Deal created");
+    toast.success(deal ? "Opportunity updated" : "Opportunity created");
     onOpenChange(false);
     onSaved();
   }
@@ -214,7 +214,7 @@ export function DealForm({
       return;
     }
     toast.success(
-      status === "won" ? "Marked as won" : status === "lost" ? "Marked as lost" : "Deal reopened",
+      status === "won" ? "Marked as won" : status === "lost" ? "Marked as lost" : "Opportunity reopened",
     );
     onOpenChange(false);
     onSaved();
@@ -229,7 +229,7 @@ export function DealForm({
       toast.error("Failed to delete deal");
       return;
     }
-    toast.success("Deal deleted");
+    toast.success("Opportunity deleted");
     setConfirmDelete(false);
     onOpenChange(false);
     onSaved();
@@ -244,7 +244,7 @@ export function DealForm({
         <div className="flex h-full flex-col">
           <SheetHeader className="border-b border-slate-700/50 p-4">
             <SheetTitle className="text-white">
-              {deal ? "Edit Deal" : "New Deal"}
+              {deal ? "Edit Opportunity" : "New Opportunity"}
             </SheetTitle>
           </SheetHeader>
 
@@ -254,7 +254,7 @@ export function DealForm({
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Deal title"
+                placeholder="Opportunity title"
                 className="border-slate-700 bg-slate-800 text-white"
               />
             </div>
@@ -289,7 +289,7 @@ export function DealForm({
               <div className="grid gap-2">
                 <Label className="text-slate-300">Value</Label>
                 <div className="relative">
-                  <DollarSign className="absolute left-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-500" />
+                  <Banknote className="absolute left-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-500" />
                   <Input
                     type="number"
                     value={value}
@@ -430,7 +430,7 @@ export function DealForm({
                 disabled={saving || !title.trim() || !contactId || !stageId}
                 className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
               >
-                {saving ? "Saving..." : deal ? "Save Changes" : "Create Deal"}
+                {saving ? "Saving..." : deal ? "Save Changes" : "Create Opportunity"}
               </Button>
             </div>
 
@@ -464,7 +464,7 @@ export function DealForm({
                   className="mt-3 flex w-full items-center justify-center gap-1 text-xs text-red-400 hover:text-red-300"
                 >
                   <Trash2 className="h-3 w-3" />
-                  Delete Deal
+                  Delete Opportunity
                 </button>
               ))}
           </div>

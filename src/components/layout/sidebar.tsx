@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
 import { useTotalUnread } from "@/hooks/use-total-unread";
+import { VdsLogo } from "@/components/brand/vds-logo";
 import {
   LayoutDashboard,
   MessageSquare,
@@ -15,6 +16,7 @@ import {
   Zap,
   Workflow,
   Globe2,
+  Star,
   Settings,
   LogOut,
   User,
@@ -45,14 +47,15 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/inbox", label: "Inbox", icon: MessageSquare },
-  { href: "/contacts", label: "Contacts", icon: Users },
-  { href: "/pipelines", label: "Pipelines", icon: GitBranch },
-  { href: "/broadcasts", label: "Broadcasts", icon: Radio },
-  { href: "/automations", label: "Automations", icon: Zap },
+  { href: "/dashboard", label: "Studio Overview", icon: LayoutDashboard },
+  { href: "/inbox", label: "Enquiry Inbox", icon: MessageSquare },
+  { href: "/contacts", label: "Leads", icon: Users },
+  { href: "/pipelines", label: "Project Pipeline", icon: GitBranch },
+  { href: "/broadcasts", label: "Campaigns", icon: Radio },
+  { href: "/automations", label: "Follow-up Flows", icon: Zap },
   { href: "/flows", label: "Flows", icon: Workflow, beta: true },
-  { href: "/dashboard/website-leads", label: "Website Leads", icon: Globe2 },
+  { href: "/dashboard/website-leads", label: "Website Enquiries", icon: Globe2 },
+  { href: "/reviews", label: "Reviews", icon: Star },
 ];
 
 const bottomNavItems = [
@@ -104,7 +107,7 @@ export function Sidebar({ open = false, onClose }: SidebarProps) {
         aria-label="Close menu"
         onClick={onClose}
         className={cn(
-          "fixed inset-0 z-30 bg-slate-950/70 backdrop-blur-sm transition-opacity lg:hidden",
+          "fixed inset-0 z-30 bg-slate-950/70 transition-opacity lg:hidden",
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0",
@@ -126,12 +129,7 @@ export function Sidebar({ open = false, onClose }: SidebarProps) {
             close button is hidden since the sidebar is always-visible. */}
         <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-slate-800 px-4">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <MessageSquare className="h-4 w-4" />
-            </div>
-            <span className="text-sm font-semibold text-white">
-              CRM Template for WhatsApp
-            </span>
+            <VdsLogo />
           </Link>
           <button
             type="button"

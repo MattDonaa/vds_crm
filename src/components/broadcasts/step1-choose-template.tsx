@@ -90,7 +90,7 @@ export function Step1ChooseTemplate({ selectedTemplate, onSelect, onNext, onBack
               <button
                 key={template.id}
                 onClick={() => onSelect(template)}
-                className={`flex flex-col gap-3 rounded-xl border p-4 text-left transition-all ${
+                className={`flex flex-col gap-3 rounded-xl border p-4 text-left transition-colors ${
                   isSelected
                     ? 'border-primary bg-primary/5 ring-1 ring-primary/30'
                     : 'border-slate-800 bg-slate-900/50 hover:border-slate-700 hover:bg-slate-900'

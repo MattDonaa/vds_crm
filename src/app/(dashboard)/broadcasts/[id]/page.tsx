@@ -256,7 +256,7 @@ export default function BroadcastDetailPage() {
       <div className="flex h-64 flex-col items-center justify-center gap-2">
         <p className="text-sm text-red-400">{error ?? 'Broadcast not found'}</p>
         <Button variant="outline" onClick={() => router.push('/broadcasts')}>
-          Back to Broadcasts
+          Back to Campaigns
         </Button>
       </div>
     );

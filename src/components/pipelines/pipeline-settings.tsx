@@ -438,7 +438,7 @@ function ColorSwatch({
       {open && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-6 z-20 flex flex-wrap gap-1 rounded-lg border border-slate-700 bg-slate-900 p-2 shadow-lg w-36">
+          <div className="absolute left-0 top-6 z-20 flex flex-wrap gap-1 rounded-lg border border-slate-700 bg-slate-900 p-2 shadow-md w-36">
             {colors.map((c) => (
               <button
                 key={c}

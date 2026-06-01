@@ -428,7 +428,7 @@ export function WhatsAppConfig() {
                   }
                 >
                   {isRegistered
-                    ? 'Registered — Meta will deliver events to wacrm'
+                    ? 'Registered — Meta will deliver events to VDS Studio Console'
                     : 'Not registered — Meta will not deliver events'}
                 </AlertTitle>
               </div>
@@ -612,7 +612,7 @@ export function WhatsAppConfig() {
                   Numbers → Two-step verification
                 </strong>
                 . Without this PIN, Meta saves your credentials but
-                won&apos;t actually route inbound messages to wacrm —
+                won&apos;t actually route inbound messages to VDS Studio Console —
                 the symptom that hits second numbers under a shared
                 WABA. Leave blank to keep an existing registration
                 untouched.

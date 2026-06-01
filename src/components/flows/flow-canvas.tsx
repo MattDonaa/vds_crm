@@ -126,7 +126,7 @@ function FlowNodeCard({ data, selected }: NodeProps) {
   return (
     <div
       className={cn(
-        "relative min-w-[220px] max-w-[260px] rounded-lg border bg-slate-900/95 px-3 py-2 text-left shadow-lg backdrop-blur transition-colors",
+        "relative min-w-[220px] max-w-[260px] rounded-lg border bg-slate-900 px-3 py-2 text-left shadow-sm transition-colors",
         selected
           ? "border-primary ring-1 ring-primary/40"
           : "border-slate-700 hover:border-slate-600",
@@ -622,7 +622,7 @@ function CanvasAddNodeButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className="inline-flex items-center gap-1.5 rounded-md border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs font-medium text-slate-200 shadow-lg transition-colors hover:bg-slate-800"
+        className="inline-flex items-center gap-1.5 rounded-md border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs font-medium text-slate-200 shadow-sm transition-colors hover:bg-slate-800"
         aria-label="Add node"
       >
         <Plus className="h-3.5 w-3.5" />

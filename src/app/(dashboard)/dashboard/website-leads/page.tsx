@@ -181,7 +181,7 @@ export default function WebsiteLeadsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-white">Website Leads</h1>
+        <h1 className="text-2xl font-bold text-white">Website Enquiries</h1>
         <p className="mt-1 text-sm text-slate-400">
           Enquiries submitted through the Veneer Digital Studio website.
         </p>
@@ -219,7 +219,7 @@ export default function WebsiteLeadsPage() {
       ) : filteredLeads.length === 0 ? (
         <div className="flex h-64 flex-col items-center justify-center rounded-xl border border-slate-800 bg-slate-900">
           <MessageSquareText className="mb-3 size-10 text-slate-600" />
-          <p className="text-sm font-medium text-white">No website leads found</p>
+          <p className="text-sm font-medium text-white">No website enquiries found</p>
           <p className="mt-1 text-xs text-slate-400">
             New website enquiries will appear here.
           </p>
@@ -367,4 +367,3 @@ export default function WebsiteLeadsPage() {
     </div>
   );
 }
-

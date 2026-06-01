@@ -280,7 +280,7 @@ function LineSvg({
           letterboxed viewBox percentage. */}
       {hovered && hover !== null && (
         <div
-          className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 rounded-md border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-[11px] shadow-lg"
+          className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 rounded-md border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-[11px] shadow-md"
           style={{ left: `${hover.tooltipLeftPx}px` }}
         >
           <div className="font-medium text-white">{longDayLabel(hovered.day)}</div>
